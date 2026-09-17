@@ -6,9 +6,6 @@ variable "instance_name" {
   type = string
 }
 
-variable "edition" {
-  type = string
-}
 
 variable "database_name" {
   type = string
