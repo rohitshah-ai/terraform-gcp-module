@@ -12,6 +12,7 @@ variable "database_name" {
 
 variable "edition" {
   type = string
+  default = "ENTERPRISE"
 }
 
 variable "cloudsql_region" {
