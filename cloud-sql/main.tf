@@ -2,7 +2,7 @@ resource "google_sql_database_instance" "this" {
   project          = var.project_id
   name             = var.instance_name
   database_version = var.database_version
-  region           = var.region_db
+  region           = var.cloudsql_region
   settings {
     tier              = var.tier
     availability_type = var.availability_type
