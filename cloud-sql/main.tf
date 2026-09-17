@@ -5,6 +5,7 @@ resource "google_sql_database_instance" "this" {
   region           = var.cloudsql_region
   settings {
     tier              = var.tier
+    edition        = var.edition
     availability_type = var.availability_type
     disk_type         = "PD_SSD"
     disk_size         = var.disk_size
