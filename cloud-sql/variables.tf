@@ -11,9 +11,9 @@ variable "database_name" {
   type = string
 }
 
-variable "region" {
+variable "region_db" {
   type    = string
-  default = "asia-south1"
+  default = "us-east1"
 }
 
 variable "database_version" {
