@@ -14,6 +14,10 @@ variable "database_name" {
   type = string
 }
 
+variable "edition" {
+  type = string
+}
+
 variable "cloudsql_region" {
   type    = string
   default = "us-east1"
