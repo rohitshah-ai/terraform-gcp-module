@@ -6,6 +6,9 @@ variable "instance_name" {
   type = string
 }
 
+variable "region" {
+  type = string
+}
 
 variable "database_name" {
   type = string
