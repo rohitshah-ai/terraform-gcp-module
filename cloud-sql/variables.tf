@@ -11,7 +11,7 @@ variable "database_name" {
   type = string
 }
 
-variable "region_db" {
+variable "cloudsql_region" {
   type    = string
   default = "us-east1"
 }
