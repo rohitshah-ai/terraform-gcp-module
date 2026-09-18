@@ -28,3 +28,16 @@ resource "google_sql_database" "this" {
   name     = var.database_name
   instance = google_sql_database_instance.this.name
 }
+resource "google_sql_database" "database" {
+  project  = var.project_id
+  name     = var.database_name
+  instance = var.cloud_sql_instance_name
+}
+
+resource "google_sql_user" "user" {
+  project  = var.project_id
+  instance = var.cloud_sql_instance_name
+
+  name     = var.database_username
+  password = var.database_password
+}
