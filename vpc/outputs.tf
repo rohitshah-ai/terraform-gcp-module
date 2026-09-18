@@ -22,3 +22,8 @@ output "subnet_cidr" {
   description = "Subnet CIDR"
   value       = google_compute_subnetwork.this.ip_cidr_range
 }
+
+output "network_self_link" {
+  description = "Self-link of the VPC network"
+  value       = google_compute_network.this.self_link
+}
