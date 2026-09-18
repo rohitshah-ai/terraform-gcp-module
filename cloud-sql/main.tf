@@ -24,3 +24,17 @@ resource "google_sql_database_instance" "this" {
 
   deletion_protection = var.deletion_protection
 }
+
+resource "google_sql_database" "this" {
+  project  = var.project_id
+  name     = var.database_name
+  instance = google_sql_database_instance.this.name
+}
+
+resource "google_sql_user" "user" {
+  project  = var.project_id
+  instance = google_sql_database_instance.this.name
+
+  name     = var.database_username
+  password = var.database_password
+}
