@@ -5,10 +5,6 @@ variable "project_id" {
 variable "instance_name" {
   type = string
 }
-
-variable "database_name" {
-  type = string
-}
 variable "database_name" {
   description = "Database name to create"
   type        = string
