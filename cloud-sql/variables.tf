@@ -5,6 +5,7 @@ variable "project_id" {
 variable "instance_name" {
   type = string
 }
+
 variable "database_name" {
   description = "Database name to create"
   type        = string
@@ -21,8 +22,13 @@ variable "database_password" {
   sensitive   = true
 }
 
+variable "private_network" {
+  description = "VPC network self-link for Cloud SQL private IP"
+  type        = string
+}
+
 variable "edition" {
-  type = string
+  type    = string
   default = "ENTERPRISE"
 }
 
@@ -32,8 +38,9 @@ variable "cloudsql_region" {
 }
 
 variable "database_version" {
-  type    = string
-  default = "POSTGRES_16"
+  description = "Cloud SQL database version"
+  type        = string
+  default     = "MYSQL_8_0"
 }
 
 variable "tier" {
