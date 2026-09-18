@@ -7,5 +7,11 @@ output "connection_name" {
 }
 
 output "database_name" {
-  value = google_sql_database.this.name
+  description = "Created database name"
+  value       = google_sql_database.database.name
+}
+
+output "database_username" {
+  description = "Created database username"
+  value       = google_sql_user.user.name
 }
