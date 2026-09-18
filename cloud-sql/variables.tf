@@ -9,6 +9,21 @@ variable "instance_name" {
 variable "database_name" {
   type = string
 }
+variable "database_name" {
+  description = "Database name to create"
+  type        = string
+}
+
+variable "database_username" {
+  description = "Application database username"
+  type        = string
+}
+
+variable "database_password" {
+  description = "Application database password"
+  type        = string
+  sensitive   = true
+}
 
 variable "edition" {
   type = string
