@@ -1,11 +1,33 @@
+resource "google_compute_global_address" "private_ip_range" {
+  project       = var.project_id
+  name          = "${var.instance_name}-private-ip-range"
+  purpose       = "VPC_PEERING"
+  address_type  = "INTERNAL"
+  prefix_length = 16
+  network       = var.private_network
+}
+
+resource "google_service_networking_connection" "private_vpc_connection" {
+  network                 = var.private_network
+  service                 = "servicenetworking.googleapis.com"
+  reserved_peering_ranges = [
+    google_compute_global_address.private_ip_range.name
+  ]
+}
+
 resource "google_sql_database_instance" "this" {
   project          = var.project_id
   name             = var.instance_name
   database_version = var.database_version
   region           = var.cloudsql_region
+
+  depends_on = [
+    google_service_networking_connection.private_vpc_connection
+  ]
+
   settings {
     tier              = var.tier
-    edition        = var.edition
+    edition           = var.edition
     availability_type = var.availability_type
     disk_type         = "PD_SSD"
     disk_size         = var.disk_size
@@ -16,7 +38,8 @@ resource "google_sql_database_instance" "this" {
     }
 
     ip_configuration {
-      ipv4_enabled = true
+      ipv4_enabled    = false
+      private_network = var.private_network
     }
   }
 
@@ -28,15 +51,10 @@ resource "google_sql_database" "this" {
   name     = var.database_name
   instance = google_sql_database_instance.this.name
 }
-resource "google_sql_database" "database" {
-  project  = var.project_id
-  name     = var.database_name
-  instance = var.cloud_sql_instance_name
-}
 
 resource "google_sql_user" "user" {
   project  = var.project_id
-  instance = var.cloud_sql_instance_name
+  instance = google_sql_database_instance.this.name
 
   name     = var.database_username
   password = var.database_password
