@@ -4,6 +4,10 @@ resource "google_sql_database_instance" "this" {
   database_version = var.database_version
   region           = var.cloudsql_region
 
+  depends_on = [
+    google_service_networking_connection.private_service_access
+  ]
+
   settings {
     tier              = var.tier
     edition           = var.edition
