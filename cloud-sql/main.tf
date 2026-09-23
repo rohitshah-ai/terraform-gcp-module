@@ -1,21 +1,3 @@
-resource "google_compute_global_address" "private_service_range" {
-  project       = var.project_id
-  name          = "${var.instance_name}-private-ip-range"
-  purpose       = "VPC_PEERING"
-  address_type  = "INTERNAL"
-  prefix_length = 16
-  network       = var.private_network
-}
-
-resource "google_service_networking_connection" "private_service_access" {
-  network = var.private_network
-  service = "servicenetworking.googleapis.com"
-
-  reserved_peering_ranges = [
-    google_compute_global_address.private_service_range.name
-  ]
-}
-
 resource "google_sql_database_instance" "this" {
   project          = var.project_id
   name             = var.instance_name
@@ -41,13 +23,6 @@ resource "google_sql_database_instance" "this" {
   }
 
   deletion_protection = var.deletion_protection
-
-  # Cloud SQL must be created after Private Service Access.
-  # During destroy, Cloud SQL will therefore be destroyed
-  # before the Service Networking connection.
-  depends_on = [
-    google_service_networking_connection.private_service_access
-  ]
 }
 
 resource "google_sql_database" "this" {
