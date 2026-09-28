@@ -1,3 +1,9 @@
+data "google_secret_manager_secret_version" "db_password" {
+  project = var.project_id
+  secret  = var.database_password_secret_id
+  version = "latest"
+}
+
 resource "google_sql_database_instance" "this" {
   project          = var.project_id
   name             = var.instance_name
