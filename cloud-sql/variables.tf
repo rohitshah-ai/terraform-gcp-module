@@ -72,3 +72,8 @@ variable "deletion_protection" {
   type    = bool
   default = true
 }
+
+variable "database_password_secret_id" {
+  description = "Secret Manager secret ID containing database password"
+  type        = string
+}
