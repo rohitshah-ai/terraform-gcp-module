@@ -6,7 +6,7 @@ variable "secret_id" {
   type = string
 }
 
-variable "secret_value" {
+variable "secret_data" {
   type      = string
   sensitive = true
 }
