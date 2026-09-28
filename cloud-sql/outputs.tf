@@ -23,6 +23,3 @@ output "database_username" {
   value       = google_sql_user.user.name
 }
 
-output "secret_id" {
-  value = module.db_password_secret.secret_id
-}
