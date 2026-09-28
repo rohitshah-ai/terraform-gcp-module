@@ -5,3 +5,8 @@ output "secret_id" {
 output "secret_name" {
   value = google_secret_manager_secret.this.name
 }
+
+output "secret_version" {
+  description = "Latest secret version"
+  value = google_secret_manager_secret_version.this.name
+}
