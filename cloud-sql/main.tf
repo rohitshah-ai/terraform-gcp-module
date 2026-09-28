@@ -34,7 +34,6 @@ resource "google_sql_database" "this" {
 resource "google_sql_user" "user" {
   project  = var.project_id
   instance = google_sql_database_instance.this.name
-
   name     = var.database_username
-  password = var.database_password
+  password = data.google_secret_manager_secret_version.db_password.secret_data
 }
