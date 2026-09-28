@@ -22,3 +22,7 @@ output "database_username" {
   description = "Created database username"
   value       = google_sql_user.user.name
 }
+
+output "secret_id" {
+  value = google_secret_manager_secret.this.secret_id
+}
